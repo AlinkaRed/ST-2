@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/ST-2.test.dir/AllTests.cpp.o" "CMakeFiles/ST-2.test.dir/tests.cpp.o" -o ST-2.test  -Wl,-rpath,/mnt/c/Users/USER/ST-2/build/src: ../src/libST-2.so ../lib/libgtest.a -lpthread 

@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/ST-2.info.dir/main.cpp.o" -o ST-2.info  -Wl,-rpath,/mnt/c/Users/USER/ST-2/build/src: libST-2.so -lpthread 
