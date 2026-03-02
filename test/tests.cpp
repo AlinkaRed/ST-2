@@ -1,5 +1,3 @@
-// Copyright 2025 UNN-CS Team
-
 #include <gtest/gtest.h>
 #include <cmath>
 #include "circle.h"
@@ -7,8 +5,6 @@
 
 const double PI = 3.1415;
 const double EPS = 1e-6;
-
-// ==================== Тесты 1‑19: класс Circle ====================
 
 TEST(AllTests, test_1) {
     Circle c(5.0);
@@ -114,7 +110,7 @@ TEST(AllTests, test_12) {
     Circle c(5.0);
     double oldF = c.getFerence();
     double oldA = c.getArea();
-    c.setRadius(5.0);  // тот же радиус
+    c.setRadius(5.0);
     EXPECT_DOUBLE_EQ(c.getRadius(), 5.0);
     EXPECT_DOUBLE_EQ(c.getFerence(), oldF);
     EXPECT_DOUBLE_EQ(c.getArea(), oldA);
@@ -177,8 +173,6 @@ TEST(AllTests, test_19) {
     EXPECT_NEAR(c.getArea(), a, EPS);
 }
 
-// ==================== Тесты 20‑25: задача «Земля и верёвка» ====================
-
 TEST(AllTests, test_20) {
     double earth_radius_km = 6378.1;
     double gap = ropeGap(earth_radius_km);
@@ -187,8 +181,8 @@ TEST(AllTests, test_20) {
 }
 
 TEST(AllTests, test_21) {
-    double r1 = 1.0;      // 1 км
-    double r2 = 1000.0;   // 1000 км
+    double r1 = 1.0;
+    double r2 = 1000.0;
     double gap1 = ropeGap(r1);
     double gap2 = ropeGap(r2);
     double expected_gap = 1.0 / (2 * PI);
@@ -203,7 +197,6 @@ TEST(AllTests, test_22) {
 }
 
 TEST(AllTests, test_23) {
-    // Имитация добавки 0 метров (вместо 1)
     double earth_radius_m = 1000.0;
     Circle earth(earth_radius_m);
     double new_ference = earth.getFerence() + 0.0;
@@ -214,28 +207,24 @@ TEST(AllTests, test_23) {
 }
 
 TEST(AllTests, test_24) {
-    double r_km = 1e-9;   // 1e-9 км = 1e-6 м
+    double r_km = 1e-9;
     double gap = ropeGap(r_km);
     double expected_gap = 1.0 / (2 * PI);
     EXPECT_NEAR(gap, expected_gap, 1e-6);
 }
 
 TEST(AllTests, test_25) {
-    // Радиус 1 млн км – достаточно большой,
-    // но при этом сохраняется точность double
     double r_km = 1e6;
     double gap = ropeGap(r_km);
     double expected_gap = 1.0 / (2 * PI);
     EXPECT_NEAR(gap, expected_gap, 1e-6);
 }
 
-// ==================== Тесты 26‑35: задача «Бассейн» ====================
-
 TEST(AllTests, test_26) {
     double pool_r = 3.0;
     double walkway = 1.0;
     double price = 1000.0;
-    double expected = PI * (16.0 - 9.0) * price;   // 7π * 1000
+    double expected = PI * (16.0 - 9.0) * price;
     double cost = poolConcreteCost(pool_r, walkway, price);
     EXPECT_NEAR(cost, expected, 1e-3);
 }
@@ -244,7 +233,7 @@ TEST(AllTests, test_27) {
     double pool_r = 3.0;
     double walkway = 1.0;
     double price = 2000.0;
-    double expected = 2 * PI * 4.0 * price;        // 8π * 2000
+    double expected = 2 * PI * 4.0 * price;
     double cost = poolFenceCost(pool_r, walkway, price);
     EXPECT_NEAR(cost, expected, 1e-3);
 }
