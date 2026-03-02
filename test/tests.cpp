@@ -8,6 +8,7 @@
 const double PI = 3.1415;
 const double EPS = 1e-6;
 
+// ==================== Тесты 1‑19: класс Circle ====================
 
 TEST(AllTests, test_1) {
     Circle c(5.0);
@@ -176,6 +177,8 @@ TEST(AllTests, test_19) {
     EXPECT_NEAR(c.getArea(), a, EPS);
 }
 
+// ==================== Тесты 20‑25: задача «Земля и верёвка» ====================
+
 TEST(AllTests, test_20) {
     double earth_radius_km = 6378.1;
     double gap = ropeGap(earth_radius_km);
@@ -184,8 +187,8 @@ TEST(AllTests, test_20) {
 }
 
 TEST(AllTests, test_21) {
-    double r1 = 1.0;
-    double r2 = 1000.0;
+    double r1 = 1.0;      // 1 км
+    double r2 = 1000.0;   // 1000 км
     double gap1 = ropeGap(r1);
     double gap2 = ropeGap(r2);
     double expected_gap = 1.0 / (2 * PI);
@@ -200,6 +203,7 @@ TEST(AllTests, test_22) {
 }
 
 TEST(AllTests, test_23) {
+    // Имитация добавки 0 метров (вместо 1)
     double earth_radius_m = 1000.0;
     Circle earth(earth_radius_m);
     double new_ference = earth.getFerence() + 0.0;
@@ -210,24 +214,28 @@ TEST(AllTests, test_23) {
 }
 
 TEST(AllTests, test_24) {
-    double r_km = 1e-9;
+    double r_km = 1e-9;   // 1e-9 км = 1e-6 м
     double gap = ropeGap(r_km);
     double expected_gap = 1.0 / (2 * PI);
     EXPECT_NEAR(gap, expected_gap, 1e-6);
 }
 
 TEST(AllTests, test_25) {
+    // Радиус 1 млн км – достаточно большой,
+    // но при этом сохраняется точность double
     double r_km = 1e6;
     double gap = ropeGap(r_km);
     double expected_gap = 1.0 / (2 * PI);
     EXPECT_NEAR(gap, expected_gap, 1e-6);
 }
 
+// ==================== Тесты 26‑35: задача «Бассейн» ====================
+
 TEST(AllTests, test_26) {
     double pool_r = 3.0;
     double walkway = 1.0;
     double price = 1000.0;
-    double expected = PI * (16.0 - 9.0) * price;
+    double expected = PI * (16.0 - 9.0) * price;   // 7π * 1000
     double cost = poolConcreteCost(pool_r, walkway, price);
     EXPECT_NEAR(cost, expected, 1e-3);
 }
@@ -236,7 +244,7 @@ TEST(AllTests, test_27) {
     double pool_r = 3.0;
     double walkway = 1.0;
     double price = 2000.0;
-    double expected = 2 * PI * 4.0 * price;
+    double expected = 2 * PI * 4.0 * price;        // 8π * 2000
     double cost = poolFenceCost(pool_r, walkway, price);
     EXPECT_NEAR(cost, expected, 1e-3);
 }
@@ -249,7 +257,8 @@ TEST(AllTests, test_28) {
     double expected_concrete = PI * 7.0 * concrete_price;
     double expected_fence = 2 * PI * 4.0 * fence_price;
     double expected_total = expected_concrete + expected_fence;
-    double total = poolTotalCost(pool_r, walkway, concrete_price, fence_price);
+    double total = poolTotalCost(
+        pool_r, walkway, concrete_price, fence_price);
     EXPECT_NEAR(total, expected_total, 1e-3);
 }
 
@@ -261,9 +270,13 @@ TEST(AllTests, test_29) {
     double expected_concrete = 0.0;
     double expected_fence = 2 * PI * pool_r * fence_price;
     double expected_total = expected_fence;
-    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price), expected_concrete, 1e-3);
-    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price), expected_fence, 1e-3);
-    EXPECT_NEAR(poolTotalCost(pool_r, walkway, concrete_price, fence_price), expected_total, 1e-3);
+    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price),
+                expected_concrete, 1e-3);
+    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price),
+                expected_fence, 1e-3);
+    EXPECT_NEAR(poolTotalCost(pool_r, walkway,
+                              concrete_price, fence_price),
+                expected_total, 1e-3);
 }
 
 TEST(AllTests, test_30) {
@@ -273,8 +286,10 @@ TEST(AllTests, test_30) {
     double fence_price = 2000.0;
     double expected_concrete = PI * walkway * walkway * concrete_price;
     double expected_fence = 2 * PI * walkway * fence_price;
-    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price), expected_concrete, 1e-3);
-    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price), expected_fence, 1e-3);
+    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price),
+                expected_concrete, 1e-3);
+    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price),
+                expected_fence, 1e-3);
 }
 
 TEST(AllTests, test_31) {
@@ -282,10 +297,13 @@ TEST(AllTests, test_31) {
     double walkway = 10.0;
     double concrete_price = 1.0;
     double fence_price = 1.0;
-    double expected_concrete = PI * (110.0 * 110.0 - 100.0 * 100.0);
+    double expected_concrete =
+        PI * (110.0 * 110.0 - 100.0 * 100.0);
     double expected_fence = 2 * PI * 110.0;
-    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price), expected_concrete, 1e-3);
-    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price), expected_fence, 1e-3);
+    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price),
+                expected_concrete, 1e-3);
+    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price),
+                expected_fence, 1e-3);
 }
 
 TEST(AllTests, test_32) {
@@ -316,7 +334,8 @@ TEST(AllTests, test_34) {
     double expected_concrete = PI * (2.5 * 2.5 - 4.0);
     double expected_fence = 2 * PI * 2.5;
     double expected_total = expected_concrete + expected_fence;
-    double total = poolTotalCost(pool_r, walkway, concrete_price, fence_price);
+    double total = poolTotalCost(
+        pool_r, walkway, concrete_price, fence_price);
     EXPECT_NEAR(total, expected_total, 1e-6);
 }
 
@@ -328,7 +347,11 @@ TEST(AllTests, test_35) {
     double expected_concrete = 0.0;
     double expected_fence = 2 * PI * 4.0 * fence_price;
     double expected_total = expected_fence;
-    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price), expected_concrete, 1e-3);
-    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price), expected_fence, 1e-3);
-    EXPECT_NEAR(poolTotalCost(pool_r, walkway, concrete_price, fence_price), expected_total, 1e-3);
+    EXPECT_NEAR(poolConcreteCost(pool_r, walkway, concrete_price),
+                expected_concrete, 1e-3);
+    EXPECT_NEAR(poolFenceCost(pool_r, walkway, fence_price),
+                expected_fence, 1e-3);
+    EXPECT_NEAR(poolTotalCost(pool_r, walkway,
+                              concrete_price, fence_price),
+                expected_total, 1e-3);
 }
