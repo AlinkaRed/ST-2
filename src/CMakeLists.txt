@@ -29,3 +29,4 @@ install(TARGETS ${PROJECT_NAME}.info
     COMPONENT library)
 install(FILES ${header_path}/circle.h ${header_path}/tasks.h
         DESTINATION "${include_dest}")
+        
